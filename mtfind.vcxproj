@@ -148,6 +148,7 @@
     <ClCompile Include="mtfind.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="log_duration.h" />
     <ClInclude Include="stdafx2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

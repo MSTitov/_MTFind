@@ -1,4 +1,5 @@
 ﻿#include "stdafx2.h"
+#include "log_duration.h"
 
 const int N = 100;
 std::mutex mtx;
@@ -45,7 +46,7 @@ namespace tools
                 {
                     if (*s == *p || *p == '?')
                     {                        
-                        ++p;
+                        ++p,
                         _s += *s;
                         if (!*p)
                             match.line = _line,
@@ -61,7 +62,7 @@ namespace tools
             }
 
             ul.unlock();
-
+            
             return match;
         }
 
@@ -79,12 +80,15 @@ namespace tools
 
 int main(int argc, char* argv[])
 {
+    LOG_DURATION("thread execution ");
+
+
     const char mask[N] = "?ad";
     std::ifstream fis("input.txt", std::ios_base::in | std::ios_base::app);
 
     if (!fis.is_open())
     {
-        std::cerr << "Could not open Client.txt\n";
+        std::cerr << "Could not open input.txt\n";
         fis.clear();
     }
 
