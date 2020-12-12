@@ -13,7 +13,7 @@ class LogDuration
 public:
     using Clock = std::chrono::steady_clock;
 
-    LogDuration(const std::string& id)
+    explicit LogDuration(const std::string& id) 
         : id_(id) {
     }
 
@@ -24,7 +24,7 @@ public:
 
         const auto end_time = Clock::now();
         const auto dur = end_time - start_time_;
-        std::cerr << id_ << ": "s << duration_cast<milliseconds>(dur).count() << " ms"s << std::endl;
+        std::cerr << id_ << ": " << duration_cast<milliseconds>(dur).count() << " ms" << std::endl;
     }
 
 private:

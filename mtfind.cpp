@@ -6,7 +6,7 @@ std::mutex mtx;
 
 struct occurrences
 {
-    occurrences() 
+    occurrences() noexcept
         : line("0"),
         pos_in_line(0),
         str("NOON") {
@@ -78,9 +78,19 @@ namespace tools
 
 } // namespace tools
 
-int main(int argc, char* argv[])
+std::ostream& operator<<(std::ostream& os, const std::vector<occurrences>& v_match)
 {
-    LOG_DURATION("thread execution ");
+    for (const auto& s : v_match)
+    {
+        os << s.line << " " << s.pos_in_line
+            << " " << s.str << std::endl;
+    }
+    return os;
+}
+
+int main(int argc, char* argv[]) 
+{
+    LOG_DURATION("threads execution ");
 
 
     const char mask[N] = "?ad";
@@ -109,19 +119,15 @@ int main(int argc, char* argv[])
             promise.set_value();
         });
         threads.emplace_back(std::move(thread));
-
+        
         waiter.wait();
         if (success.pos_in_line)
             ++counter,
             match.push_back(success);
     }
 
-    std::cout << counter << std::endl;
-    for (const auto& s : match)
-    {
-        std::cout << s.line << " " << s.pos_in_line
-            << " " << s.str << std::endl;
-    }
+    std::cout << counter << std::endl
+        << match << std::endl;
 
     for (auto& thread : threads)
     {

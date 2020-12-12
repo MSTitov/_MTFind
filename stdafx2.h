@@ -37,7 +37,7 @@
 #include <mutex>
 #include <future>
 #include <string>
-#include <assert.h>
+#include <cassert>
 #include <vector>
 #include <iostream>
 #include <fstream>
