@@ -38,11 +38,13 @@
 #include <future>
 #include <string>
 #include <cassert>
+#include <chrono>
 #include <vector>
 #include <iostream>
 #include <fstream>
 
 #pragma warning(pop) //For /Wall
 // TODO: reference additional headers your program requires here
+
 
 #endif // !STDAFX2_H_
